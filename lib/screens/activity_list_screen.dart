@@ -33,7 +33,23 @@ class _ActivityListScreenState extends State<ActivityListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final List<Widget> tiles = [];
+    for (final activity in activities) {
+      tiles.add(
+        ActivityTile(
+          activity: activity,
+          isJoined: joined.contains(activity.name),
+          onOpen: () {
+            openDetails(activity);
+          },
+        ),
+      );
+    }
+
+    return Scaffold(
+      appBar: AppBar(title: const Text("Izvannastavne aktivnosti")),
+      body: ListView(padding: const EdgeInsets.all(8), children: tiles),
+    );
   }
 }
 
